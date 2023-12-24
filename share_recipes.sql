@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 15, 2023 at 02:33 PM
--- Server version: 10.4.25-MariaDB
+-- Host: localhost:3306
+-- Generation Time: Dec 24, 2023 at 03:32 PM
+-- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,20 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
-  `is_active` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `is_active` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `is_active`) VALUES
-(1, 'Makanan', 1),
-(2, 'Minuman', 1),
-(3, 'Cemilan', 1),
-(4, 'Sayur', 1);
+(1, 'Minang', 1),
+(2, 'Jawa', 1),
+(3, 'Aceh', 1),
+(4, 'Manado', 1);
 
 -- --------------------------------------------------------
 
@@ -50,29 +50,34 @@ INSERT INTO `categories` (`id`, `name`, `is_active`) VALUES
 --
 
 CREATE TABLE `recipes` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `category_id` int NOT NULL,
   `materials` text NOT NULL,
   `procedures` text NOT NULL,
-  `thumbnail` varchar(255) NOT NULL DEFAULT 'assets/thumbs/thumb.jpg',
-  `is_active` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `thumbnail` varchar(255) NOT NULL DEFAULT 'assets/img/thumb.jpg',
+  `is_active` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `recipes`
 --
 
 INSERT INTO `recipes` (`id`, `title`, `user_id`, `category_id`, `materials`, `procedures`, `thumbnail`, `is_active`) VALUES
-(1, 'Membuat Pisang Crispy', 1, 3, '<ul><li>5 buah pisang kepok yang sudah matang atau pisang lain sesuai selera</li><li>Minyak goreng secukupnya</li><li>100 gram tepung terigu serbaguna</li><li>2 sendok makan tepung beras</li><li>Air matang secukupnya</li><li>1 butir kuning telur dikocok lepas</li><li>1 sendok makan gula halus</li><li>1/4 sendok teh garam</li><li>1/2 sendok teh baking powder</li></ul>', '<ol><li> bersih pisang dan potong menjadi 2 bagian. Sisihkan.</li><li>Buat bahan kremesan terlebih dahulu dengan mencampurkan tepung sagu, tepung beras, garam, kuning telur, gula halus, dan baking powder.</li><li>Tuang air ke dalam adonan kremesan secukupnya dan aduk hingga larut dan jangan terlalu kental. Sisihkan bahan kremesan.</li><li>Sedangkan untuk membuat bahan pencelup pisang, siapkan mangkuk dan campurkan tepung terigu, tepung beras, gula halus, dan garam.</li><li>Lalu tuang air matang secukupnya dan aduk rata hingga semua bahan larut dan mengental.</li><li>Panaskan minyak yang cukup banyak untuk menggoreng pisang.</li><li>Setelah minyak panas, tuang bahan kremesan ke dalam wajan secara melingkar.</li><li>Ambil 1 buah pisang dan celupkan ke bahan pencelup dan goreng di tengah kremesan dengan api sedang.</li><li>Lipat pisang dengan kremesan dan goreng sampai matang berwarnba kuning keemasan. Angkat dan tiriskan pisang goreng crispy.</li><li>Lakukan proses di atas sampai pisang dan adonan habis.</li><li>Pisang goreng crispy siap disajikan.</li></ol>', 'assets/thumbs/thumb.jpg', 1),
-(2, 'Es Pisang Coklat', 1, 2, '<ul><li>10 buah pisang ambon atau pisang jenis lain yang sudah matang, potong menjadi 2 bagian</li><li>20 buah stik es cream atau tusuk sate</li><li>150 gram coklat batangan, potong-potong kecil</li><li>150 gram margarin</li><li>50 gram gula pasir jika coklatnya kurang manis</li><li>Topping sesuai selera (meses warna-warni, irisan kacang almond, kacang tanah cacah)</li></ul>', '<ol><li>Siapkan semua bahan yang dibutuhkan untuk membuat es pisang coklat.</li><li>Kupas pisang dan potong menjadi 2 bagian.</li><li>Lalu tusukkan pisang dengan tusuk sate atau stik es krim. Masukkan pisang ke dalam freezer minimal selama 1 jam. Lebih lama di freezer maka </li>lebih baik. Sisihkan.<li>Sambil menunggu pisang dingin dan agak mengeras, selanjutnya tinggal buat lapisan coklatnya.</li><li>Campurkan potongan coklat batang, margarin, dan gula pasir dalam wadah anti panas. Lalu lelehkan coklat dengan cara di tim di atas air </li>mendidih.<li>Rebus air sampai mendidih dalam panci terlebih dahulu. Setelah mendidih, taruh mangkuk anti panas berisi coklat di atas air mendidih dan </li>aduk-aduk coklat sampai cair. Pastikan tidak ada setetes air atau uap yang masuk ke dalam coklat.<li>Setelah coklat meleleh, sisihkan biar adonan coklat dingin.</li><li>Setelah 1 jam, ambil pisang dari dalam freezer lalu celupkan ke dalam lelehan coklat secara merata. Bisa celupkan berkali-kali agar lapisan </li>coklat tebal.<li>Taruh pisang di atas plastik atau wadah datar lalu taburi dengan topping sesuai selera.</li><li>Masukkan pisang coklat ke dalam freezer lagi dan tunggu hingga coklat beku dan mengeras.</li><li>Jika coklat sudah mengeras, es pisang coklat siap disajikan untuk keluarga tercinta.</li></ol>', 'assets/thumbs/thumb.jpg', 1),
-(3, 'Keripik Pisang', 2, 3, '<ul><li>1 sisir pisang kepok muda yang masih hijau</li><li>1 sendok makan garam atau sesuai selera</li><li>5 butir bawang putih yang telah dihaluskan (opsional)</li><li>1/2 sendok teh penyedap rasa</li><li>Minyak goreng secukupnya</li><li>Air secukupnya untuk merendam</li></ul>', '<ol><li>Kupas pisang dan cuci hingga bersih agar tidak lengket karena getahnya. Lalu iris-iris tipis panjang melintang menggunakan pisau atau alat perajang pisang. </li><li>Siapkan air perendam pisang yaitu campurkan air secukupnya dengan penyedap rasa, garam, dan bawang putih yang telah dihaluskan.</li><li>Masukkan pisang ke dalam air rendaman dan diamkan selama 15 menit agar bumbu meresap. Angkat dan tiriskan.</li><li>Panaskan cukup banyak minyak untuk menggoreng.</li><li>Goreng keripik pisang dengan api sedang sampai kering dan berwarna kuning keemasan. Angkat dan tiriskan.</li><li>Simpan keripik ke dalam toples yang kedap udara agar selalu renyah.</li><li>Keripik pisang gurih siap disajikan kapanpun sebagai cemilan.</li></ol>', 'assets/thumbs/thumb.jpg', 1),
-(4, 'Molen Pisang', 3, 3, '<ul><li>Pisang kepok atau pisang raja matang secukupnya</li><li>Minyak goreng secukupnya</li><li>250 gram tepung terigu serbaguna</li><li>50 gram gula halus</li><li>1/2 sendok teh garam</li><li>1/2 sendok teh vanili bubuk</li><li>1/2 sendok teh baking powder</li><li>1 butir telur dikocok lepas</li><li>3 sendok makan margarin dicairkan</li><li>Air secukupnya</li></ul>', '<ol><li>Siapkan semua bahan yang dibutuhkan untuk membuat molen pisang.</li><li>Kupas pisang sampai bersih lalu potong-potong sesuai selera untuk isian. sisihkan.</li><li>Siapkan wadah besar dan campurkan tepung terigu, gula halus, garam, vanili bubuk, dan baking powder. aduk rata.</li><li>Masukkan telur kocok dan aduk rata kembali.</li><li>Tuang margarin cair dan uleni adonan hingga kalis dan adonan halus. jika terlalu kering bisa tambahkan sedikit air sampai adonan lentur dan benar-benar kalis.</li><li>Setelah adonan kulit jadi, bentuk bulat dan tutup adonan dengan kain bersih atau plastik wrap. diamkan adonan selama 30 menit.</li><li>Setelah 30 menit, uleni lagi adonan kulit dan bagi menjadi beberapa bagian dan bentuk bulat-bulat kecil.</li><li>Gilas tipis adonan kulit menjadi memanjang lalu ambil 1 potong pisang dan balut pisang secara melingkar dengan adonan yang sudah di gilas tadi.</li><li>Lakukan proses di atas sampai semua bahan habis.</li><li>Panaskan banyak minyak dalam wajan untuk menggoreng dengan api kecil.</li><li>Goreng adonan molen pisang sampai matang kering berwarna kuning kecoklatan. angkat dan tiriskan.</li><li>Molen pisang renyah siap disajikan selagi hangat.</li></ol>', 'assets/thumbs/thumb.jpg', 1),
-(5, 'Nasi Goreng Spesial', 3, 1, '<ul><li>3 mangkok nasi putih kalau bisa nasi yang pera</li><li>1 potong daging ayam bagian dada atau paha</li><li>3 butir telur dikocok lepas</li><li>5 buah bakso diiris</li><li>100 gram udang tanpa kulit</li><li>2 batang daun bawang diiris tipis</li><li>Kecap manis secukupnya</li><li>Garam secukupnya</li><li>Penyedap rasa secukupnya (opsional)</li><li>Minyak goreng secukupnya untuk menumis</li><li>Bawang merah goreng secukupnya untuk taburan</li><li>6 butir bawang merah</li><li>3 siung bawang putih</li><li>6 buah cabai rawit merah</li><li>5 buah cabai merah besar atau keriting</li></ul>', '<ol><li>Cuci bersih daging paha atau dada ayam sampai matang dan suwir-suwir halus. Sisihkan.</li><li>Panaskan minyak secukupnya untuk menumis. Tumis bumbu halus sampai benar-benar harum. Sisihkan bumbu di pinggir wajan.</li><li>Goreng telur yang sudah kamu kocok lepas menjadi orak-arik. Baru campurkan telur orak-arik dengan bumbu halus tadi dalam wajan.</li><li>Tambahkan suwiran daging ayam, irisan bakso, dan udang. Tumis semua bahan sampai udang matang dan berubah warna.</li><li>Baru tambahkan nasi putih dan aduk nasi hingga tercampur rata.</li><li>Bumbui dengan kecap manis, garam, dan penyedap rasa secukupnya. Aduk sampai nasi berubah warna menjadi kecoklatan, matang, dan bumbu meresap. Jangan lupa koreksi rasa sampai benar-benar pas.</li><li>Setelah matang, tambahkan potongan daun bawang dan aduk nasi lagi sampai daun bawang layu. Baru angkat dan taruh di piring.</li><li>Taburkan bawang goreng sesuai selera di atasnya. (Kamu juga bisa menambah irisan mentimun, telur ceplok, atau kerupuk).</li><li>Nasi goreng spesial siap disajikan.</li></ol>', 'assets/thumbs/thumb.jpg', 1),
-(7, 'Resep Kesukaan Mamanya Mertua Istriku', 2, 1, '<ul><li>bahan1</li><li>bahan2</li></ul>', '<ul><li>langkah1</li><li>langkah2</li><li>langkah3</li></ul>', 'assets/thumbs/thumb.jpg', 1),
-(9, 'Diganti judulnya', 2, 4, '<p>ini adalah bahan yang diperlukan resep ganti judulnya</p>', '<p>ini adalah cara pembuatan ganti judulnya</p>', 'assets/thumbs/2022122421452963a71089b213d.jpg', 1),
-(11, 'Resep Nasi Padang', 2, 1, '<ul><li>Ayam - 500 gram</li><li>Serai, memarkan - 2 batang</li><li>Lengkuas - 2 ruas jari</li><li>Daun jeruk purut - 4 lembar</li><li>Santan kental - 500 ml</li><li>Garam - secukupnya</li><li>Gula - secukupnya</li></ul>', '<ol><li>Gulai ayam: Haluskan semua bumbu halus, kemudian tumis bersama serai, lengkuas dan daun jeruk sampai harum.</li><li>Masukkan ayam, aduk rata. Masak sampai ayam berubah warna.</li><li>Masukkan santan, bumbui dengan garam dan gula hingga rasanya pas.</li><li>Masak dengan api kecil sampai ayam matang dan kuah mengental.</li><li>Sambalado Hijau: Rebus semua bahan sambal sampai lunak, cabai, tomat dan bawang merah. Kemudian uleg kasar sambal, tambahkan garam dan gula sesuai selera. Tumis sebentar dengan minyak goreng. Sambal siap disajikan.</li><li>Tata nasi di piring saji, tambahkan daun singkong rebus, telur dadar padang, sambalado hijau dan gulai ayam beserta kuahnya.</li></ol>', 'assets/thumbs/2022122421421163a70fc3204cc.jpg', 1);
+(14, 'Mie Aceh', 7, 3, '<p>- 500 gr mie kuning<br>- 150 gr udang<br>- 100 gr daging sapi, potong kotak-kotak kecil<br>- 100 gr kol putih, iris<br>- 100 gr toge<br>- 1 buah tomat, potong memanjang<br>- 1 sdm kecap asin<br>- 2 batang daun bawang, iris halus<br>- 2 sdm kecap manis<br>- 4 siung bawang putih, iris<br>- 4 siung bawang merah, iris<br>- Garam secukupnya<br>- Kaldu jamur secukupnya<br>- 2 sdm minyak untuk menumis<br>- 1 sdt garam<br>- 1/2 sdt merica<br>- 1/4 sdt adas manis<br>- 2 buah kapulaga<br>- 2 buah kemiri<br>- 2 sdm bubuk kari india<br>- 3 siung bawang putih<br>- 5 buah cabai rawit<br>- 1 sdm minyak untuk menghaluskan bumbu<br>- Emping secukupnya<br>- Telur ceplok/dadar</p>', '<p>1. Haluskan semua bumbu lalu tambahkan sedikit minyak. Sisihkan.<br>2. Tumis bawang merah dan bawang putih, masukkan udang dan daging. Aduk hingga berubah warna.<br>3. Masukkan bumbu halus dan mie kuning, aduk rata.<br>4. Tambahkan tauge, kecap manis, garam dan kaldu jamur. Koreksi rasa. Angkat.<br>5. Sajikan dengan toping di atasnya.</p>', 'assets/thumbs/2023122414055665883ac4ccde2.jpg', 1),
+(15, 'Ayam tangkap', 7, 3, '<p>- 500 gr daging ayam, potong-potong dan cuci bersih<br>- 1 lembar daun pandan, potong-potong<br>- 1 ruas lengkuas<br>- 2 lembar daun salam koja atau daun kari<br>- Air secukupnya<br>- 1 ruas jahe<br>- 1 ruas kunyit<br>- 1 sdt ketumbar<br>- 1 sdt merica butir<br>- 2 sdt garam/secukupnya<br>- 4 siung bawang putih<br>- 1 batang serai, memarkan dan potong-potong<br>- 3 lembar daun pandan agak besar, potong-potong<br>- 3 siung bawang merah, iris tipis<br>- 4 lembar daun kari<br>- 5 lembar daun jeruk<br>- 7 buah cabai hijau</p>', '<p>1. Campurkan ayam dengan bumbu halus. Masukkan lengkuas, daun pandan dan daun salam koja/kari.<br>2. Tuang air hingga ayam tenggelam. Aduk rata dan ungkep ayam hingga matang atau kurang lebih 30 menit. Aduk sesekali untuk melihat tingkat kematangannya.<br>3. Siapkan minyak goreng dan bumbu pelengkap. Goreng ayam ungkep bersama dengan bumbu pelengkap. Goreng hingga matang kecokelatan, angkat dan siap sajikan di piring.</p>', 'assets/thumbs/2023122414052265883aa25e78d.jpg', 1),
+(16, 'Udang tumis Aceh', 7, 3, '<p>- 250 gr udang<br>- 1 buah kentang potong dadu<br>- 1 siung bawang merah<br>- 2 buah cabe hijau<br>- Air secukupnya<br>- Gula dan garam<br>- Minyak goreng<br>- 1 sdt Ketumbar<br>- 10 buah asam jawa<br>- 2 siung bawang putih<br>- 3 siung bawang merah<br>- 5 buah cabe rawit<br>- 8 buah cabe merah</p>', '<p>1. Bersihkan udang dan cuci hingga bersih.<br>2. Haluskan semua bumbu halus kemudian sisihkan.<br>3. Tumis bawang merah, cabe hijau dan bumbu halus hingga harum.<br>4. Masukkan kentang, aduk hingga matang.<br>5. Tambahkan air, aduk hingga mendidih. Masukkan udang, masak hingga matang. Sajikan.</p>', 'assets/thumbs/2023122414042765883a6b94872.jpg', 1),
+(17, 'Pampis Tongkol', 9, 4, '<p>- 1 ekor ikan tongkol<br>- air jeruk nipis<br>- 2 batang serai, memarkan<br>- 5 lembar daun jeruk<br>- 2 lembar daun kunyit, iris halus<br>- 1 lembar daun pandan, ikat simpul<br>- 1 rantang daun kemangi petik<br>- 2 batang daun bawang, iris<br>- garam dan gula pasir secukupnya<br>- 20 butir bawang merah<br>- 8 siung bawang putih<br>- 20 buah cabai merah keriting<br>- 25 buah cabai rawit merah<br>- seruas kunyit<br>- seruas jahe</p>', '<ol><li>Bersihkan ikan tongkol, beri garam dan air jeruk nipis. Diamkan sebentar, kukus sampai matang. Suwir-suwir dagingnya. Sisihkan</li><li>Tumis bumbu halus bersama bumbu faun kecuali kemangi sampai harum. Beri garam dan gula secukupnya</li><li>Masukkan ikan tongkol suwir, aduk rata sampai bumbu meresap</li><li>Sebelum diangkat masukkan kemangi. Aduk sebentar. Sajikan.</li></ol>', 'assets/thumbs/2023122414034165883a3d73350.jpg', 1),
+(18, 'Tenggiri Woku', 9, 4, '<p>- 7 potong ikan tenggiri<br>- 1 sdm air jeruk nipis<br>- 6 lembar daun jeruk<br>- 1 lembar daun pandan, simpul<br>- 1 tomat potong-potong<br>- 1 lembar daun kunyit muda, iris halus<br>- 3 batang daun bawang iris kasar<br>- 1 batang serai memarkan<br>- 10 butir cabai rawit merah utuh<br>- 3 genggam kemangi<br>- garam<br>- gula<br>- air secukupnya<br>- 10 butir bawang merah<br>- 4 siung bawang putih<br>- 5 cabai merah kriting<br>- 10 cabai rawit merah<br>- 1 seruas jempol jahe<br>- 1 ruas kunyit</p>', '<ol><li>Bersikah ikan, balur jeruk nipis, garam. Goreng sebentar saja</li><li>Tumis bumbu halus, serai, daun jeruk, kunyit, bawang, pandan, dan cabai rawit utuh hingga harum</li><li>Masukkan ikan, aduk rata, tambah tomat, garam, gula, dan air</li><li>Masak sampai bumbu meresap, cicipi rasa. Sesaat sebelum diangkat beri kemangi.</li><li>Aduk sebentar saja, kemudian angkat dan sajikan.</li></ol>', 'assets/thumbs/20231224140231658839f724c98.jpg', 1),
+(19, 'Ayam woku', 9, 4, '<p>- 1,5 kg ayam negeri<br>- 1 1/2 sachet kaldu ayam<br>- 3 ikat daun kemangi<br>- 1 lembar daun kunyit<br>- 3 lembar daun salam<br>- 3 lembar daun jeruk<br>- irisan daun bawang<br>- 1 lembar daun pandan<br>- 4-5 jeruk nipis<br>- 1-2 buah tomat/diganti cuka secukupnya<br>- minyak goreng untuk tumis<br>- air 3-4 cup<br>- 4-5 rawit utuh<br>- 6 butir bawang merah<br>- 6 siung bawang putih<br>- 4-5 batang cabai merah besar<br>- 5-6 batang cabai merah keriting<br>- 10-15 cabai rawit hijau/merah/oranye<br>- 5-6 butir kemiri<br>- 1/2 batang jahe<br>- 1 batang kunyit<br>- garam dan gula pasir secukupnya</p>', '<ol><li>Cuci bersih ayam, lalu balur dan rendam ayam dengan jeruk nipis dan garam</li><li>Tumis bumbu halus sampai harum lalu masukkan daun kunyit, daun salam, daun bawang, daun jeruk, daun pandan dan cabai rawit utuh hingga harum</li><li>Masukkan ayam, aduk rata agar semua bumbunya larut</li><li>Rebus sebentar, aduk sesekali biar rata semua. Masukkan garam, gula pasir, kaldu bubuk, rebus sampai air menyusut</li><li>Jika sudah matang, masukkan daun kemangi dan aduk rata</li><li>Masak sebentar dan sajikan.</li></ol>', 'assets/thumbs/20231224140128658839b8cfa2b.jpg', 1),
+(20, ' Gudeg', 11, 2, '<p>- 1 kg nangka muda, potong kotak lalu rebus sebentar dengan sedikit garam, angkat, tiriskan<br>- 400 gram gula merah, sisir<br>- 4 batang serai, geprek<br>- 4 ruas lengkuas, geprek<br>- 5 lembar daun salam<br>- 4 lembar daun jeruk<br>- 1 liter santan cair<br>- 700 ml air kelapa<br>- 1 liter santan kental<br>- Garam secukupnya<br>- 3 lembar daun jati<br>- Telur rebus<br>- 100 gram bawang merah<br>- 10 siung bawang putih<br>- 8 butir kemiri sangrai<br>- 20 gram ketumbar bubuk</p>', '<p>1. Tata daun jati di dasar panci, lalu masukkan nangka muda dan semua bumbu. Tuang santan cair dan juga air kelapa. Kemudian tutup kembali dengan daun jati dan tutup panci, masak hingga kuah sedikit menyusut.<br>2. Setelah kuah sedikit menyusut tambahkan gula merah, garam, dan santan kental. Tutup kembali dengan daun jati dan tutup panci, lanjutkan memasak dengan api kecil.<br>3. Koreksi rasa. Terakhir tambahkan telur rebus, kemudian tutup panci kembali, lanjut masak gudegnya hingga matang dan benar-benar kering selama 8-10 jam.<br>4. Sajikan.</p>', 'assets/thumbs/20231224140035658839838bde8.jpg', 1),
+(21, 'Getuk', 11, 2, '<p>- 1 kg singkong, kupas cuci lalu potong-potong<br>- 150 gram kelapa parut<br>- 100 gram gula pasir<br>- Pewarna makanan<br>- 1 sdt garam<br>- Secukupnya kelapa parut + sejumput garam lalu kukus sebentar</p>', '<p>1. Panaskan kukusan.<br>2. Kukus singkong bersama 150 gram kelapa parut hingga matang, kira-kira selama 30 menit.<br>3. Angkat dan pindahkan dalam wadah yang cukup besar, lalu taburi 1 sdt garam dan 100 gram gula pasir. Aduk rata.<br>4. Siapkan alat penggiling singkong. Giling sedikit-sedikit hingga habis.<br>5. Bagi menjadi 3 bagian. Beri pewarna sesuai selera.<br>6. Kemudian giling lagi bentuk panjang, tata di piring dan siap disajikan bersama kelapa parut.</p>', 'assets/thumbs/2023122413592865883940211d3.jpg', 1),
+(22, 'Oseng mercon', 11, 2, '<p>- 500 gram daging sapi campur tetelan<br>- 1 batang serai geprek<br>- 2 lembar daun jeruk<br>- 2 lembar daun salam<br>- 15 buah cabai rawit utuh<br>- 2 sdm air asam Jawa<br>- 2 sdm gula merah sisir<br>- Garam dan penyedap rasa kaldu sapi secukupnya<br>- Gula pasir sesuai selera.<br>- 10 buah cabai rawit merah<br>- 5 buah cabai merah keriting<br>- 2 buah cabai merah besar<br>- 8 siung bawang merah<br>- 4 siung bawang putih<br>- 2 ruas jahe<br>- 2 butir kemiri</p>', '<p>1. Cuci bersih daging sapi dan tetelan, rebus sekitar 1 jam.<br>2. Saat merebus tambahkan daun jeruk.<br>3. Angkat daging sapi dari air kaldunya, potong-potong sesuai selera.<br>4. Tumis bumbu halus hingga harum, masukkan bumbu cemplung kecuali cabai rawit utuh.<br>5. Masukkan irisan daging sapi, aduk, tambahkan air rebusannya, bila kurang airnya bisa ditambahkan lagi.<br>6. Biarkan hingga mendidih.<br>7. Setelah mendidih, tambahkan garam, kaldu sapi, gula merah dan gula pasir.<br>8. Tambahkan pula air asam Jawa.<br>9. Terakhir masukkan cabai rawit utuh.<br>10. Setelah dagingnya empuk dan airnya sedikit menyusut, tes rasa, angkat dan sajikan.</p>', 'assets/thumbs/202312241358476588391702145.jpg', 1),
+(23, 'Rendang daging', 10, 1, '<p>- 1 kg daging sapi<br>- Baby kentang<br>- 2 lembar daun kunyit<br>- 1 batang sereh<br>- 4 lembar daun jeruk<br>- 1 lembar daun salam<br>- 1 sdm ambu2 (boleh skip)<br>- 1 ons cabai giling halus<br>- 1 kg santan kental<br>- 10 bawang merah ukuran besar<br>- 5 bawang putih<br>- Jahe (sebesar ibu jari)<br>- Lengkuas muda (sebesar ibu jari)<br>- 1 paket rempah gulai/rendang (ketumbar, kapulaga, bunga pekak, cengkeh, kayu manis dan buah pala)<br>- Garam (sesuai selera)</p>', '<p>1.Masukkan semua bahan dalam satu wajan/kuali kecuali daging, kentang dan ambu-ambu (kelapa kering khas masakan Padang).<br>2.Aduk sebentar hingga santan sedikit mendidih.<br>3.Masukkan daging dan ambu-ambu.<br>4.Jika rendang sudah meletup-letup, masukan kentang.<br>5.Aduk lagi hingga rendang tanak (mengeluarkan minyak) dan rendang menghitam.</p>', 'assets/thumbs/20231224135802658838ea1d11d.jpg', 1),
+(24, 'Gulai daun singkong', 10, 1, '<p>- Daun singkong direbus dan peras, lalu potong-potong<br>- Daun salam<br>- Lengkuas<br>- Serei<br>- Rawit utuh<br>- Udang kering<br>- Teri Medan<br>- Santan<br>- Bawang merah<br>- Bawang putih<br>- Cabai merah<br>- Terasi<br>- Kunyit<br>- Kemiri</p>', '<p>1. Tumis bumbu halus sampai wangi, baru masukkan ebi aduk, tuang santan encer masukkan daun singkong, penyedap rasa kalau Sudah mendidih.<br>2.Masukkan santan kental, kecilkan api, aduk terus jangan sampai pecah santannya, aduk sampai mendidih, matikan api dan angkat.</p>', 'assets/thumbs/20231224135726658838c6442cc.jpg', 1),
+(25, 'Balado jengkol', 10, 1, '<p>- 250 gr jengkol, belah dua<br>- 2 buah kentang kupas, potong-potong<br>- 50 gr teri<br>- 1 buah tomat, iris<br>- Minyak dan garam secukupnya<br>- 100 gr cabai keriting<br>- 5 buah cabai rawit<br>- 7 siung bawang merah</p>', '<p>1.Goreng kentang sampai matang lalu tiriskan.<br>2.Goreng jengkol, lalu masukkan ke mangkok berisi air kemudian tiriskan lalu geprek.<br>3.Goreng teri sampai matang, tiriskan.<br>4.Tumis bumbu halus dan tomat sampai matang, beri garam secukupnya.<br>5.Icip rasa, matikan api. Tuang bahan-bahan yang sudah digoreng ke tumisan cabai. Aduk rata.<br>6.Sajikan dengan nasi hangat.</p>', 'assets/thumbs/20231224135602658838727d447.jpg', 1),
+(26, 'Nama_resep', 2, 1, '<p>Bahan 1</p><p>Bahan 2</p>', '<p>Langkah 1</p><p>Langkah 2</p>', 'assets/thumbs/20231224145237658845b5834a3.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -81,14 +86,14 @@ INSERT INTO `recipes` (`id`, `title`, `user_id`, `category_id`, `materials`, `pr
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
-  `is_active` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `is_admin` tinyint NOT NULL DEFAULT '0',
+  `is_active` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -100,7 +105,12 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `photo`, `is_admin`, 
 (3, 'Pak Budi', 'budi', '$2y$10$eCwHkpXzu4uMl/dyBsWSU.An1B2o/.T9JNEUlBb/tXVi9QnJefshi', NULL, 0, 1),
 (4, 'Susan', 'susan', '$2y$10$XZpimk/b7OnZGNmx48.Rfu7U7uq8GhFoVWxik4RTw1z1oEDv/EigO', NULL, 0, 1),
 (5, 'Rendi', 'rendi', '$2y$10$jsgcreTpeks90ZLPjHTqnuLZDaJYBGi1CS14NhU54Ui2URkaWSSX6', NULL, 0, 1),
-(6, 'Wati', 'wati', '$2y$10$vxaL4nZJZJWpKxRID5c.kO8jqhdBHVw0Ho5t2UcbXWdwJiQiR2RlS', NULL, 0, 1);
+(6, 'Wati', 'wati', '$2y$10$vxaL4nZJZJWpKxRID5c.kO8jqhdBHVw0Ho5t2UcbXWdwJiQiR2RlS', NULL, 0, 1),
+(7, 'Andrian Fakhruza ', 'afakhruza', '$2y$10$as2yc.JR4uCBONkX.HNZLOQdMlHyEMto8Dd5pg8EdgypIq2EwW3pu', NULL, 0, 1),
+(9, 'Vidya Ayuningtyas', 'vidya', '$2y$10$C/63mtQPC0wyr2pT.LAomeNJ.shihiGGJHMsm0TDEesVoG37D6qL6', NULL, 0, 1),
+(10, 'Billa', 'billa', '$2y$10$UlKq9nacxiLAJ4ODFJ0PbubgWid6W59iLJ8HsCyaD7R7UfegJIl2W', NULL, 0, 1),
+(11, 'Fachrul Rozi', 'rozi', '$2y$10$zlMDg1kPYj.oDJabBTDu/u6kkWxQUqm6XwlokIwH5MXf5BCuNYXSu', NULL, 0, 1),
+(12, 'Andrian Fakhruza ', 'afakhruza1', '$2y$10$r9H5YPKdmmgdiBYsWSteDeJhLwBUXbfjqbpyl0L2PejfKN7Bj7NEa', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -109,12 +119,12 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `photo`, `is_admin`, 
 -- (See below for the actual view)
 --
 CREATE TABLE `vw_recipes` (
-`id` int(11)
+`id` int
 ,`title` varchar(255)
-,`user_id` int(11)
+,`user_id` int
 ,`user_name` varchar(255)
 ,`user_username` varchar(255)
-,`category_id` int(11)
+,`category_id` int
 ,`category_name` varchar(255)
 ,`materials` text
 ,`procedures` text
@@ -128,7 +138,7 @@ CREATE TABLE `vw_recipes` (
 --
 DROP TABLE IF EXISTS `vw_recipes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_recipes`  AS SELECT `recipes`.`id` AS `id`, `recipes`.`title` AS `title`, `recipes`.`user_id` AS `user_id`, `users`.`name` AS `user_name`, `users`.`username` AS `user_username`, `recipes`.`category_id` AS `category_id`, `categories`.`name` AS `category_name`, `recipes`.`materials` AS `materials`, `recipes`.`procedures` AS `procedures`, `recipes`.`thumbnail` AS `thumbnail` FROM ((`recipes` join `users` on(`recipes`.`user_id` = `users`.`id`)) join `categories` on(`recipes`.`category_id` = `categories`.`id`)) WHERE `recipes`.`is_active` = 1 AND `categories`.`is_active` = 1 AND `users`.`is_active` = 1 ORDER BY `recipes`.`id` AS `DESCdesc` ASC  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_recipes`  AS SELECT `recipes`.`id` AS `id`, `recipes`.`title` AS `title`, `recipes`.`user_id` AS `user_id`, `users`.`name` AS `user_name`, `users`.`username` AS `user_username`, `recipes`.`category_id` AS `category_id`, `categories`.`name` AS `category_name`, `recipes`.`materials` AS `materials`, `recipes`.`procedures` AS `procedures`, `recipes`.`thumbnail` AS `thumbnail` FROM ((`recipes` join `users` on((`recipes`.`user_id` = `users`.`id`))) join `categories` on((`recipes`.`category_id` = `categories`.`id`))) WHERE ((`recipes`.`is_active` = 1) AND (`categories`.`is_active` = 1) AND (`users`.`is_active` = 1)) ORDER BY `recipes`.`id` DESC ;
 
 --
 -- Indexes for dumped tables
@@ -163,19 +173,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -185,8 +195,8 @@ ALTER TABLE `users`
 -- Constraints for table `recipes`
 --
 ALTER TABLE `recipes`
-  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
